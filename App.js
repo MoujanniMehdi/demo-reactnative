@@ -1,21 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import {
+  TouchableOpacity,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  SafeAreaView,
+  Image,
+} from "react-native";
+
+const image = {
+  uri: "http://cn8ce.e-monsite.com/medias/images/logo-off.jpg?fx=r_550_550",
+};
+
+const onPress = () => Alert.alert("Test");
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>Big Title ?</Text>
+
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+        <Text>Press to find out</Text>
+      </TouchableOpacity>
+
+      <Image source={image} style={styles.backgroundImage} />
+
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  text: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 3000,
+  },
+
+  button: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 10,
+    marginTop: 155,
   },
 });
