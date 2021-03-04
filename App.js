@@ -1,63 +1,78 @@
-import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  SafeAreaView,
+  ImageBackground,
+} from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 const Tab = createMaterialBottomTabNavigator();
-
-// Feed Tab
-function Feed() {
+//const image = { uri: "https://reactjs.org/logo-og.png" };
+// Forum Tab
+function Forum() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Feed!</Text>
-    </View>
+    <SafeAreaView
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+    >
+      <View style={styles.background}>
+        <Text>Forum!</Text>
+      </View>
+
+      <StatusBar style="dark" />
+    </SafeAreaView>
   );
-} // End of Feed tab
+} // End of Forum tab
 
 //Profile tab
 function Profile() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Profile!</Text>
+    <View style={{ flex: 1, flexDirection: "column" }}>
+     <Text style={styles.text}>Inside</Text>
     </View>
   );
 } //End of Profile tab
 
-// Notification tab
-function Notifications() {
+// Map tab
+function Map() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Notifications!</Text>
+      <Text>Map!</Text>
+      <StatusBar style="dark" />
     </View>
   );
-} // End of Notification tab
+} // End of Map tab
 
 function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
-      activeColor="#e7ab3c"
-      labelStyle={{ fontSize: 12 }}
-      style={{ backgroundColor: "tomato" }}
+      initialRouteName="Forum"
+      activeColor="#ffffff"
+      inactiveColor="#545454"
+      barStyle={{ backgroundColor: "#000000", paddingTop: 6, paddingBottom: 6 }}
     >
       <Tab.Screen
-        name="Feed"
-        component={Feed}
+        name="Forum"
+        component={Forum}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "Forum",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons name="forum" color={color} size={26} />
           ),
         }}
       />
       <Tab.Screen
-        name="Notifications"
-        component={Notifications}
+        name="Map"
+        component={Map}
         options={{
-          tabBarLabel: "Updates",
+          tabBarLabel: "Map",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <MaterialCommunityIcons name="map" color={color} size={26} />
           ),
         }}
       />
@@ -66,8 +81,13 @@ function MyTabs() {
         component={Profile}
         options={{
           tabBarLabel: "Profile",
+          tabBarColor: "#1f65ff",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons
+              name="account-circle"
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
@@ -82,3 +102,25 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+  text: {
+    color: "white",
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "#000000a0",
+  },
+  background:{
+    
+  }
+});
