@@ -11,17 +11,15 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
 const Tab = createMaterialBottomTabNavigator();
-//const image = { uri: "https://reactjs.org/logo-og.png" };
 // Forum Tab
 function Forum() {
   return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
+    <SafeAreaView style={styles.container}>
       <View style={styles.background}>
-        <Text>Forum!</Text>
+        <Text style={styles.text}>Forum!</Text>
       </View>
 
       <StatusBar style="dark" />
@@ -29,25 +27,47 @@ function Forum() {
   );
 } // End of Forum tab
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 //Profile tab
 function Profile() {
   return (
-    <View style={{ flex: 1, flexDirection: "column" }}>
-     <Text style={styles.text}>Inside</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>This is the Profile tab</Text>
     </View>
   );
 } //End of Profile tab
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 // Map tab
 function Map() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Map!</Text>
-      <StatusBar style="dark" />
+    <View style={styles.mapcontainer}>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+        initialRegion={{
+          latitude: 33.9716,
+          longitude: -6.8498,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        }}
+        showUserLocation={true}
+        toolbarEnabled={true}
+        loadingEnabled={true}
+      >
+        <Marker
+          coordinate={{
+            latitude: 33.9716,
+            longitude: -6.8498,
+          }}
+        />
+      </MapView>
     </View>
   );
 } // End of Map tab
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// My Tabs
 function MyTabs() {
   return (
     <Tab.Navigator
@@ -94,7 +114,9 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+// End of My Tabs
 
+// Default function
 export default function App() {
   return (
     <NavigationContainer>
@@ -103,10 +125,13 @@ export default function App() {
   );
 }
 
+// Style sheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     flex: 1,
@@ -114,13 +139,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    color: "white",
-    fontSize: 42,
+    color: "black",
     fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000a0",
   },
-  background:{
-    
-  }
+  mapcontainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
 });
