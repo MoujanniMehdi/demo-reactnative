@@ -12,8 +12,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import markerData from "./data/markerData.json";
 
 const Tab = createMaterialBottomTabNavigator();
+const mapStyle = require("./assets/mapStyle.json");
+
 // Forum Tab
 function Forum() {
   return (
@@ -21,7 +24,6 @@ function Forum() {
       <View style={styles.background}>
         <Text style={styles.text}>Forum!</Text>
       </View>
-
       <StatusBar style="dark" />
     </SafeAreaView>
   );
@@ -41,28 +43,32 @@ function Profile() {
 // Map tab
 function Map() {
   return (
-    <View style={styles.mapcontainer}>
+    <SafeAreaView style={styles.mapcontainer}>
       <MapView
+        showsMyLocationButton={true}
+        customMapStyle={mapStyle}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={{
           latitude: 33.9716,
           longitude: -6.8498,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
+          latitudeDelta: 15,
+          longitudeDelta: 15,
         }}
         showUserLocation={true}
         toolbarEnabled={true}
         loadingEnabled={true}
       >
-        <Marker
-          coordinate={{
-            latitude: 33.9716,
-            longitude: -6.8498,
-          }}
-        />
+        {markerData.map(mrkr => (
+          <Marker 
+          key={mrkr.name} 
+          coordinate={{longitude: mrkr.longitude, latitude: mrkr.latitude}}
+          title={mrkr.name}
+          description={"This guys lives here !"}/>
+        ))}
       </MapView>
-    </View>
+      <StatusBar style="dark" />
+    </SafeAreaView>
   );
 } // End of Map tab
 
