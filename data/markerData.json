@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "604691537a4229f3cf8e53f8"
+  },
+  "name": "mehdi",
+  "latitude": 34.029331,
+  "longitude": -6.841376
+},{
+  "_id": {
+    "$oid": "604692c37a4229f3cf8e53fc"
+  },
+  "name": "saad",
+  "latitude": 34.025099,
+  "longitude": -6.848041
+},{
+  "_id": {
+    "$oid": "6046930c7a4229f3cf8e53fd"
+  },
+  "name": "alla",
+  "latitude": 34.016384,
+  "longitude": -6.844978
+}]
